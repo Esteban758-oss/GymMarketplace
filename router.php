@@ -39,6 +39,11 @@ switch ($params[0]){
         $id = $params[1];
         $controller->updateProducto($id);
         break;
+    case 'detalle':         //NUEVO 
+        $controller = new ProductoController();
+        $id=$params[1];
+        $controller->showDetalle($id);
+        break;
     default:
         echo('404 page not found');
         break;

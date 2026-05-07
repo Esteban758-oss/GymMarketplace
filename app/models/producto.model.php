@@ -13,6 +13,33 @@ class ProductoModel extends Model{
 
         return $productos;
 
-    }        
+    }       
+
+      //NUEVO->
+
+    function getProducto($id){
+        $query=$this->db->prepare('SELECT p.*, c.nombre AS nombre_categoria FROM producto p JOIN categoria c ON p.id_categoria = c.id WHERE p.id = ?');
+        $query->execute([$id]);
+
+        $producto = $query->fetch(PDO:: FETCH_OBJ);
+        return $producto;   
+    } 
+
+    function insertProducto($nombre, $desc, $precio, $stock, $id_categoria){
+        $query = $this->db->prepare('INSERT INTO producto (nombre, descripcion, precio, stock, id_categoria) VALUES (?,?,?,?,?)');
+        $query->execute([$nombre, $desc, $precio, $stock]);
+        return $this->db->lastInsertId;
+    }
+
+    function updateProducto($id, $nombre, $descripcion, $precio, $stock, $id_categoria){
+        $query=$this->db->prepare('UPDATE producto set nombre = ?, descripcion = ?, precio = ?, stock = ?, id_categoria = ? WHERE id = ?');
+        $query->execute([$nombre, $descripcion, $precio, $stock, $id_categoria]);
+    }
+
+    function removeProducto($id){
+        $query=$this->db->prepare('DELETE FROM producto WHERE id = ?');
+        $query->execute([$id]);
+    }
+
 
 }
