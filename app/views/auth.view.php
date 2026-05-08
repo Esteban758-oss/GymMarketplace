@@ -8,8 +8,8 @@ class AuthView {
             <form action="' . BASE_URL . 'verify" method="POST">  
                 <h1>Iniciar Sesión</h1>
                 
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required placeholder="admin@admin.com">
+                <label for="usuario">Usuario</label>
+                <input type="text" name="user" id="usuario" required placeholder="webadmin">
 
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" id="password" required>';
