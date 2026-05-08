@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once __DIR__ . '/app/controllers/producto.controller.php';
+require_once __DIR__ . '/app/controllers/auth.controller.php';
 
 // define la base URL del sitio
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
@@ -21,6 +22,18 @@ $params= explode('/', $action);
 
 //determina que camino seguir segun la accion
 switch ($params[0]){
+    case 'login':
+        $controller = new AuthController();
+        $controller->showLogin();
+        break;
+    case 'verify':
+        $controller = new AuthController();
+        $controller->verify();
+        break;
+    case 'logout':
+        $controller = new AuthController();
+        $controller->logout();
+        break;
     case 'listar':
         $controller = new ProductoController();
         $controller->showProductos();
