@@ -1,0 +1,40 @@
+<?php
+class CategoriaView {
+    public function showCategorias($categorias) {
+        ?>
+        <h1>Crear nueva categoría</h1>
+
+        <form action="insertar-categoria/" method="POST">
+            <label>Nombre: <input type="text" name="nombre" required></label>
+            <label>Descripcion: <input type="text" name="descripcion" required></label>
+            <input type="submit">
+        </form>
+
+        <h1>Catálogo de Gym Shop</h1>
+        
+        <ul>
+            <?php foreach($categorias as $categoria) { ?>
+                <li> 
+                    <?php echo $categoria->nombre; ?> - Descripción: <?php echo $categoria->descripcion; ?> | 
+                    <a href="<?php echo BASE_URL; ?>categoria/<?php echo $categoria->id; ?>"> VER ITEMS </a> - 
+                    <a href="<?php echo BASE_URL; ?>actualizar-categoria/<?php echo $categoria->id; ?>"> EDITAR </a> - 
+                    <a href="<?php echo BASE_URL; ?>eliminar-categoria/<?php echo $categoria->id; ?>"> ELIMINAR </a>
+                </li>
+            <?php } ?>
+        </ul>
+        <?php
+    }
+
+    public function showCategoria($categoria) {
+        ?>
+        <h1>Catálogo de Gym Shop</h1>
+        
+        <ul>
+            <li> 
+                <?php echo $categoria->nombre; ?> - Descripción: <?php echo $categoria->descripcion; ?>
+            </li>
+        </ul>
+        <?php
+    }
+}
+?>
