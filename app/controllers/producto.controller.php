@@ -1,7 +1,6 @@
 <?php
 include_once __DIR__ . '/../models/producto.model.php';
 include_once __DIR__ . '/../views/producto.view.php';
-
 class ProductoController {
 
     private $model;
@@ -47,7 +46,13 @@ class ProductoController {
     //Elimina el producto del sistema
     function deleteProducto($id){
         $this->model->removeProducto($id);
-        header("Location: " . BASE_URL);
+        header("Location: " . BASE_URL . "listar");
+    }
+
+    // mostrar el formulario con datos viejos
+    public function editProducto($id) {
+        $producto = $this->model->getProducto($id);
+        $this->view->showEditForm($producto);
     }
 
     function updateProducto($id){

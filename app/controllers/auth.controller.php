@@ -22,12 +22,18 @@ class AuthController{
         $usuario=$this->model->getUsuario($user);
         //chequeo que exista y que la clave sea la misma
         if ($usuario && password_verify($password, $usuario->password)){
-            session_start();  //para que recuerde al usuario
             $_SESSION["logueado"] = true;
-            $_SESSION["username"] = $usuario->email;   //TAL VEZ DEBA SACAR EMAIL
+            $_SESSION["username"] = $usuario->user;  
             header("Location: " . BASE_URL);
         } else{
             $this->view->showLogin("Acceso denegado");
         }
     }
+
+    function logout() {
+        session_start();
+        session_destroy();
+        header("Location: " . BASE_URL . "login");
+    }
+
 }
