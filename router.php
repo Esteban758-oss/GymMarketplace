@@ -81,6 +81,15 @@ switch ($params[0]){
         $id=$params[1];
         $controller->showDetalle($id);
         break;
+    case 'form-producto':
+        if (AuthHelper::isLoged()) {
+            $controller = new ProductoController();
+            $controller->showFormulario();
+        } else {
+            header('Location: ' . BASE_URL . 'login');
+        }
+   
+        break;
 
 
     //RUTAS CATEGORIA
@@ -92,27 +101,39 @@ switch ($params[0]){
     case 'categoria':
         $controller = new CategoriaController();
         $id = $params[1];
-        if (!isset($id)){
+        if (!isset($id)){   //ES NECESARIO?
             header("Location: " . BASE_URL . "categorias");  
         }
         $controller->showCategoria($id);
         break;
 
     case 'insertar-categoria':
-        $controller = new CategoriaController();
-        $controller->addCategoria();
+        if (AuthHelper::isLoged()){
+            $controller = new CategoriaController();
+            $controller->addCategoria();
+        } else {
+            header('Location: ' . BASE_URL . 'login');
+        }
         break;
 
    case 'eliminar-categoria': //eliminar-categoria/id
-        $controller = new CategoriaController();
-        $id = $params[1];
-        $controller->deleteCategoria($id);
+        if (AuthHelper::isLoged()){
+            $controller = new CategoriaController();
+            $id = $params[1];
+            $controller->deleteCategoria($id);
+        } else {
+            header('Location: ' . BASE_URL . 'login');
+        }
         break;
         
     case 'actualizar-categoria':
-        $controller = new CategoriaController();
-        $id = $params[1];
-        $controller->updateCategoria($id);
+        if (AuthHelper::isLoged()){
+            $controller = new CategoriaController();
+            $id = $params[1];
+            $controller->updateCategoria($id);
+        } else {
+            header('Location: ' . BASE_URL . 'login');
+        }
         break;
 
     default:

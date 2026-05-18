@@ -14,17 +14,17 @@ class CategoriaModel extends Model{
         return $categorias;
 
     }        
-    function getCategoria($id){
+    function getProductosPorCategoria($idCategoria){
         //1. La conexión ya se establece en el constructor del padre Model.
 
         //2.enviar la consulta
         $consulta = 'SELECT categoria.nombre AS "categoria", categoria.descripcion AS "descripcion_categoria", producto.* FROM categoria JOIN producto ON categoria.id = producto.id_categoria WHERE categoria.id = ?';
         $query = $this->db->prepare($consulta);
-        $query->execute([$id]);
+        $query->execute([$idCategoria]);
         //3. obtengo la respuesta con un fetch (es una sola categoría)
-        $categoria = $query->fetchAll(PDO::FETCH_OBJ); //objeto de producto
+        $productos = $query->fetchAll(PDO::FETCH_OBJ); //objeto de producto
 
-        return $categoria;
+        return $productos;
     }      
     
     function insertCategoria($nombre, $descripcion){

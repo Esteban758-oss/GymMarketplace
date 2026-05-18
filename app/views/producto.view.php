@@ -15,20 +15,31 @@ class ProductoView {
         }
         echo "</ul>";
         if (AuthHelper::isLoged()) {
-            $this->showAddForm();
+            echo "<a href='" . BASE_URL . "form-producto/'> Insertar Producto </a>";
         }
     }
 
-    public function showAddForm() {
-        echo '
-        <h2>Agregar Producto</h2>
-        <form action="add" method="POST">
-            <input name="nombre" placeholder="Nombre">
-            <input name="precio" placeholder="Precio">
-            <select name="id_categoria"> </select>
-            <button type="submit">Guardar</button>
-        </form>';
-    }
+    public function showAddForm($categoriasDisponibles) {
+    echo '
+    <h2>Agregar Producto</h2>
+    <form action="' . BASE_URL . 'insertar" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre del producto" required>
+        <textarea name="descripcion" placeholder="Descripción"></textarea>
+        <input type="number" name="precio" placeholder="Precio" step="0.01" required>
+        <input type="number" name="stock" placeholder="Stock" required>
+        
+        <label for="id_categoria">Categoría:</label>
+        <select name="id_categoria" required>';
+
+            foreach ($categoriasDisponibles as $cat) {
+                echo "<option value='$cat->id'>$cat->nombre</option>";
+            }
+
+    echo '
+        </select>
+        <button type="submit">Guardar</button>
+    </form>';
+}
 
     public function showEditForm($producto) {
         echo "

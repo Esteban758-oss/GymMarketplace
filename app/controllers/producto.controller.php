@@ -1,19 +1,21 @@
 <?php
 include_once __DIR__ . '/../models/producto.model.php';
+include_once __DIR__ . '/../models/categoria.model.php';
 include_once __DIR__ . '/../views/producto.view.php';
 class ProductoController {
 
     private $model;
     private $view;
+    private $modelCategoria;
 
     function __construct(){
        
         $this->model = new ProductoModel();
         
         $this->view = new ProductoView();
-    }
 
-    function showVentas()
+        $this->modelCategoria = new CategoriaModel();
+    }
 
     //Imprimir los productos
     function showProductos(){
@@ -30,13 +32,11 @@ class ProductoController {
         $precio = $_POST['precio'];
         $stock = $_POST['stock'];
         $id_categoria= $_POST['id_categoria'];
-
         //verifico campos obligatorios
         if (empty($nombre) || empty($descripcion) || empty($precio) || empty($stock)){
             $this->view->showError('Faltan datos obligatorios');
             die();
         }
-
         //inserto la tarea en la DB
         //Para que estoy guardando la id??  //para redirirlo al detalle del producto que queria insertar
         $id = $this->model->insertProducto($nombre, $descripcion, $precio, $stock, $id_categoria);
@@ -86,6 +86,11 @@ class ProductoController {
         } else { 
             $this->view->showError('el producto no existe');
         }
+    }
+
+    function showFormulario(){
+        $categorias = $this->modelCategoria->getCategorias();
+        $this->view->showAddForm($categorias);
     }
 
 }

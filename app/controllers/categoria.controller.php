@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../models/categoria.model.php';
-include_once __DIR__ . '/../views/categoria.phtml';
+include_once __DIR__ . '/../views/categoria.view.php';
 include_once __DIR__ . '/../views/producto.view.php';
 
 class CategoriaController {
@@ -28,10 +28,11 @@ class CategoriaController {
     //Imprimir la categoria
     function showCategoria($id){
         //obtiene los categorias del modelo
-        $categoria = $this->model->getCategoria($id);
+        $productos = $this->model->getProductosPorCategoria($id);
         //actualizo la vista
         // $this->view->showCategoria($categoria);
-        $this->view_producto->showProductos($categoria);
+        $this->view_producto->showProductos($productos);
+
 
     }
 

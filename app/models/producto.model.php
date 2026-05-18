@@ -28,7 +28,7 @@ class ProductoModel extends Model{
     function insertProducto($nombre, $desc, $precio, $stock, $id_categoria){
         $query = $this->db->prepare('INSERT INTO producto (nombre, descripcion, precio, stock, id_categoria) VALUES (?,?,?,?,?)');
         $query->execute([$nombre, $desc, $precio, $stock, $id_categoria]);
-        return $this->db->lastInsertId;
+        return $this->db->lastInsertId();
     }
 
     function updateProducto($id, $nombre, $descripcion, $precio, $stock, $id_categoria){
