@@ -52,7 +52,7 @@ class ProductoView {
         echo "<p><strong>Precio:</strong> $" . $producto->precio . "</p>";
         echo "<p><strong>Stock disponible:</strong> " . $producto->stock . " unidades</p>";
         
-        echo "<br><a href='" . BASE_URL . "listar'>Volver al catálogo</a>";
+        echo "<br><a href='/listar'>Volver al catálogo</a>";
     }
 
     // Método extra para mostrar mensajes de error si algo falla

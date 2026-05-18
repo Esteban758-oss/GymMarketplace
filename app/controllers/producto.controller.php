@@ -13,6 +13,8 @@ class ProductoController {
         $this->view = new ProductoView();
     }
 
+    function showVentas()
+
     //Imprimir los productos
     function showProductos(){
         //obtiene los productos del modelo
