@@ -37,6 +37,15 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO `usuario` (`user`, `password`) VALUES
+                ("webadmin", "$2y$10$Q3/E7X1xHj1T3oYxJp0h7.K8T6I/R9.x7P7K.T4w8j3C8/9/8.T3G");
 END;
                 $this->db->query($sql);
             }
